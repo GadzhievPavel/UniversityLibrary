@@ -3,6 +3,8 @@ package library;
 import java.util.Objects;
 
 public class Book {
+
+
     private Integer id;
     private String name;
     private String author;
@@ -11,6 +13,10 @@ public class Book {
         this.id = id;
         this.name = name;
         this.author = author;
+    }
+
+    public Integer getId() {
+        return id;
     }
     @Override
     public boolean equals(Object obj) {

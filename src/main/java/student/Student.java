@@ -1,6 +1,10 @@
 package student;
 
+import library.Book;
 import library.ReaderTicket;
+
+import java.util.HashSet;
+import java.util.Iterator;
 
 public class Student {
     String name;
@@ -12,7 +16,7 @@ public class Student {
         this.name = name;
         this.lastName = lastName;
         this.numberGroup = numberGroup;
-        this.readerTicket = null;
+        this.readerTicket = new ReaderTicket(this);
     }
 
     public String getName() {
@@ -31,4 +35,19 @@ public class Student {
         return readerTicket;
     }
 
+    public HashSet<Book> getBooks(){
+        return getReaderTicket().getBooks();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder("У студента ").append(getName()).append("из группы ").append(getNumberGroup()).append("на руках книги:\n");
+        HashSet<Book> books = getBooks();
+        Iterator<Book> iterator = books.iterator();
+        while (iterator.hasNext()){
+            Book book = iterator.next();
+            builder.append(book.toString());
+        }
+        return builder.toString();
+    }
 }

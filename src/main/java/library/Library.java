@@ -20,6 +20,7 @@ public class Library {
 
     public Library(HashSet<Book> books){
         this.books = books;
+        this.journal = new Journal();
     }
 
     public String getCurrentBooks(){
@@ -32,11 +33,25 @@ public class Library {
         return builder.toString();
     }
 
-    public Book getBook(Student student, int id){
+    public Book getBook(Student student, int id, int days){
         if(student.getReaderTicket()!= null){
+            Iterator<Book> iterator = books.iterator();
+            Book book = null;
+            while (iterator.hasNext()){
+                Book bookTemp = iterator.next();
+                if(bookTemp.getId() == id){
+                    book = bookTemp;
+                    break;
+                }
+            }
             Date date = new Date();
 
-            ItemJournal itemJournal = new ItemJournal(student.getReaderTicket(), book, LocalDateTime.now(),7);
+            if(book!= null){
+                ItemJournal itemJournal = new ItemJournal(student.getReaderTicket(), book, LocalDateTime.now(),days);
+                journal.addJournalItem(itemJournal);
+                books.remove(book);
+                student.getReaderTicket().addBook(book);
+            }
         }
         return null;
     }

@@ -8,4 +8,9 @@ public class Journal {
     public Journal(){
         items = new HashSet<>();
     }
+
+    public void addJournalItem(ItemJournal itemJournal){
+        items.add(itemJournal);
+    }
+
 }
